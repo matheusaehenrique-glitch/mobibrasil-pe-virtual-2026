@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MobiBrasil PE Virtual</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#07121d;color:#fff;font-family:Arial,sans-serif}
+header{height:65px;background:#0b1d2b;display:flex;align-items:center;padding:12px 18px;border-bottom:1px solid #234050}
+.logo{background:linear-gradient(135deg,#6d5dfc,#159bd5);width:40px;height:40px;border-radius:12px;display:grid;place-items:center;font-weight:bold;margin-right:12px}
+.brand{font-weight:bold}.brand small{display:block;color:#91a5b0;font-size:10px;margin-top:3px}
+main{max-width:900px;margin:auto;padding:14px}
+.card{background:#0e202d;border:1px solid #1c3949;border-radius:18px;margin-bottom:12px;padding:17px;box-shadow:0 8px 25px #0004}
+.profile{background:linear-gradient(110deg,#302878,#12607c);display:flex;align-items:center}
+.avatar{width:58px;height:58px;border-radius:16px;background:white;color:#392d8d;display:grid;place-items:center;font-weight:bold;margin-right:14px}
+.profile h2{margin:0 0 5px;font-size:19px}.profile p{margin:4px 0;font-size:12px;color:#d9e2e8}
+.online{color:#6bf0a4}
+.icon{width:42px;height:42px;background:#123c4d;border-radius:12px;display:grid;place-items:center;color:#77e8ff}
+.action,.row{display:flex;align-items:center;gap:12px}
+.cap{font-size:10px;color:#8ea3af;font-weight:bold}.action b{display:block;margin:3px 0}.sub,p{color:#98aab5;font-size:12px}
+.arrow{margin-left:auto;font-size:25px;color:#9eb3bd}
+.badge{float:right;background:#dcf8e9;color:#28704c;border-radius:20px;padding:7px 12px;font-size:10px;font-weight:bold}
+.tags{display:flex;gap:8px;flex-wrap:wrap}.tag{background:#162f3c;padding:8px 10px;border-radius:10px;font-size:11px}
+.route{color:#9caeb8;font-size:12px;margin-top:10px}
+.login{position:fixed;inset:0;background:#000c;display:none;align-items:center;justify-content:center;padding:20px;z-index:5}
+.box{background:#0c1d2a;border:1px solid #294656;border-radius:20px;padding:25px;width:100%;max-width:390px}
+input,select{width:100%;padding:13px;margin:6px 0;background:#07131d;color:#fff;border:1px solid #294252;border-radius:10px}
+button{width:100%;padding:13px;margin-top:8px;border:0;border-radius:10px;background:linear-gradient(90deg,#6d5dfc,#159bd5);color:white;font-weight:bold}
+.secondary{background:#18303d}.error{color:#ff9292;font-size:12px;display:none;margin-top:6px}
+.admin{display:none}
+</style>
+</head>
+
+<body>
+
+<header>
+<div class="logo">MB</div>
+<div class="brand">MOBIBRASIL PE VIRTUAL<small>PORTAL OPERACIONAL</small></div>
+</header>
+
+<main>
+
+<div class="card profile" onclick="abrirLogin()">
+<div class="avatar">MM</div>
+<div>
+<h2>Olá, Matheus Mello</h2>
+<p>Administrador Geral</p>
+<p><span class="online">● ATIVO</span> • Acesso administrativo</p>
+</div>
+<div class="arrow">›</div>
+</div>
+
+<div class="card action">
+<div class="icon">✓</div>
+<div>
+<div class="cap">PRÓXIMA AÇÃO</div>
+<b>Realizar vistoria regular</b>
+<div class="sub">Escala disponível • envie a vistoria para análise</div>
+</div>
+</div>
+
+<div class="card">
+<span class="badge">ESCALADO</span>
+<h3>🚌 Operação Regular</h3>
+<div class="tags">
+<span class="tag">⇆ Linha 1913</span>
+<span class="tag">▣ Veículo 1.816</span>
+</div>
+<div class="route">TI PE-15 / TI Joana Bezerra</div>
+</div>
+
+<div class="card row">
+<div class="icon">☑</div>
+<div><b>Vistoria</b><p>Checklist e análise do veículo</p></div>
+<div class="arrow">›</div>
+</div>
+
+<div class="card row">
+<div class="icon">⚙</div>
+<div><b>Extra</b><p>Sem operação ativa</p></div>
+<div class="arrow">›</div>
+</div>
+
+<div class="card row">
+<div class="icon">☾</div>
+<div><b>Bacurau</b><p>Operação disponível entre 00h00 e 05h00</p></div>
+<div class="arrow">›</div>
+</div>
+
+<div class="card row">
+<div class="icon">♆</div>
+<div><b>TBT</b><p>Sem operação ativa</p></div>
+<div class="arrow">›</div>
+</div>
+
+<div class="card row admin" id="painelAdmin">
+<div>
+<h3>👑 Painel do Administrador Geral</h3>
+<p>Gerencie funcionários
