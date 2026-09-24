@@ -69,7 +69,9 @@ button{width:100%;padding:13px;margin-top:8px;border:0;border-radius:10px;backgr
 <span class="tag">▣ Veículo 1.816</span>
 </div>
 <div class="route">TI PE-15 / TI Joana Bezerra</div>
-</div>
+<button id="btnEscala" type="button" style="display:none;" onclick="event.stopPropagation(); alterarEscala()">
+  🔐 Alterar escala
+</button></div>
 
 <div class="card row">
 <div class="icon">☑</div>
@@ -203,6 +205,20 @@ function abrirPerfil(){
 function fecharPerfil(){
   document.getElementById("perfil").style.display = "none";
   }
+
+  function alterarEscala(){
+  if(localStorage.getItem("perfil") !== "admin"){
+    alert("🔒 Acesso restrito!\n\nSomente administradores podem alterar a escala.");
+    return;
+  }
+
+  const novaEscala = prompt("Digite a nova escala:");
+
+  if(novaEscala && novaEscala.trim() !== ""){
+    alert("✅ Escala alterada para:\n\n" + novaEscala)
+    }
+  }
+
 function entrar(){
   const usuario = document.getElementById("usuario").value.trim();
   const senha = document.getElementById("senha").value;
@@ -210,6 +226,8 @@ function entrar(){
   const painel = document.getElementById("painel");
 
   if(usuario === "admin" && senha === "1234"){
+    localStorage.setItem("perfil", "admin");
+    document.getElementById("btnEscala").style.display = "block";
     erro.textContent = "";
     fecharLogin();
 
