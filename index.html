@@ -42,7 +42,7 @@ button{width:100%;padding:13px;margin-top:8px;border:0;border-radius:10px;backgr
 
   <main id="painel">
 
-<div class="card profile" onclick="abrirLogin()">
+<div class="card profile" onclick="abrirPerfil()">
 <div class="avatar">MM</div>
 <div>
 <h2>Olá, Matheus Mello</h2>
@@ -158,7 +158,19 @@ button{width:100%;padding:13px;margin-top:8px;border:0;border-radius:10px;backgr
 </div>
 </div>
 </main>
+<div class="login" id="perfil" style="display:none">
+  <div class="box">
+    <h2>👤 Perfil administrativo</h2>
 
+    <p><b>Nome:</b> Matheus Mello</p>
+    <p><b>Função:</b> Administrador Geral</p>
+    <p><b>Status:</b> <span class="online">● ATIVO</span></p>
+    <p><b>Nível de acesso:</b> Administrativo</p>
+    <p><b>Sistema:</b> MobiBrasil PE Virtual</p>
+
+    <button type="button" onclick="fecharPerfil()">Fechar</button>
+  </div>
+</div>
 <div class="login" id="login">
   <div class="box">
     <h2>🔐 Acesso ao sistema</h2>
@@ -182,7 +194,13 @@ function abrirLogin(){
 function fecharLogin(){
   document.getElementById("login").style.display = "none";
 }
+function abrirPerfil(){
+  document.getElementById("perfil").style.display = "flex";
+}
 
+function fecharPerfil(){
+  document.getElementById("perfil").style.display = "none";
+  }
 function entrar(){
   const usuario = document.getElementById("usuario").value.trim();
   const senha = document.getElementById("senha").value;
