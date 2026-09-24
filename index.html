@@ -183,14 +183,22 @@ function fecharLogin(){
 }
 
 function entrar(){
-  const usuario = document.getElementById("usuario").value;
+  const usuario = document.getElementById("usuario").value.trim();
   const senha = document.getElementById("senha").value;
   const erro = document.getElementById("erro");
 
   if(usuario === "admin" && senha === "1234"){
     erro.textContent = "";
     fecharLogin();
+
     alert("Acesso autorizado!");
+
+    const painel = document.getElementById("painelAdmin");
+
+    if(painel){
+      painel.style.display = "block";
+    }
+
   }else{
     erro.textContent = "Usuário ou senha incorretos.";
   }
