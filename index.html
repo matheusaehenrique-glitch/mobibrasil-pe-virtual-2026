@@ -191,7 +191,7 @@ button{width:100%;padding:13px;margin-top:8px;border:0;border-radius:10px;backgr
   <script type="module">
   // Import the functions you need from the SDKs you need
   import { initializeApp } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
-  import { getFirestore } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
+  import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
   // TODO: Add SDKs for Firebase products that you want to use
   // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -229,7 +229,7 @@ function fecharPerfil(){
   document.getElementById("perfil").style.display = "none";
   }
 
-  function alterarEscala(){
+  async function alterarEscala(){
   if(localStorage.getItem("perfil") !== "admin"){
     alert("🔒 Acesso restrito!\n\nSomente administradores podem alterar a escala.");
     return;
@@ -237,9 +237,30 @@ function fecharPerfil(){
 
   const novaEscala = prompt("Digite a nova escala:");
 
-  if(novaEscala && novaEscala.trim() !== ""){
-    alert("✅ Escala alterada para:\n\n" + novaEscala)
+if(novaEscala && novaEscala.trim() !== ""){
+    const agora = new Date();
+    const dataHora = agora.toLocaleString("pt-BR");
+
+    try {
+        await setDoc(
+            doc(window.db, "escalas", "operacao"),
+            {
+                escala: novaEscala.trim(),
+                alteradoEm: dataHora
+            }
+        );
+
+        alert(
+            "✅ Escala alterada com sucesso!\n\n" +
+            "Nova escala: " + novaEscala.trim() + "\n" +
+            "Alterada em: " + dataHora
+        );
+
+    } catch (erro) {
+        console.error(erro);
+        alert("❌ Não foi possível salvar a alteração.");
     }
+}
   }
 
 function entrar(){
