@@ -61,7 +61,7 @@ button{width:100%;padding:13px;margin-top:8px;border:0;border-radius:10px;backgr
 </div>
 </div>
 
-<div class="card">
+<div class="card" onclick="abrirOperacao()">
 <span class="badge">ESCALADO</span>
 <h3>🚌 Operação Regular</h3>
 <div class="tags">
@@ -186,7 +186,9 @@ button{width:100%;padding:13px;margin-top:8px;border:0;border-radius:10px;backgr
   </div>
 </div>
 
-<script>
+<script> function abrirOperacao(){
+  alert("Operação Regular\n\nLinha: 1913\nVeículo: 1.816\nRota: TI PE-15 / TI Joana Bezerra");
+}
 function abrirLogin(){
   document.getElementById("login").style.display = "flex";
 }
