@@ -98,3 +98,104 @@ button{width:100%;padding:13px;margin-top:8px;border:0;border-radius:10px;backgr
 <div>
 <h3>👑 Painel do Administrador Geral</h3>
 <p>Gerencie funcionários
+</p>
+
+<div class="card row">
+  <div class="icon">👥</div>
+  <div>
+    <b>Funcionários</b>
+    <p>Gerenciar usuários e funções</p>
+  </div>
+  <div class="arrow">›</div>
+</div>
+
+<div class="card row">
+  <div class="icon">🚌</div>
+  <div>
+    <b>Veículos</b>
+    <p>Cadastro e controle da frota</p>
+  </div>
+  <div class="arrow">›</div>
+</div>
+
+<div class="card row">
+  <div class="icon">📋</div>
+  <div>
+    <b>Escalas</b>
+    <p>Consultar e organizar escalas</p>
+  </div>
+  <div class="arrow">›</div>
+</div>
+
+<div class="card row">
+  <div class="icon">🛣️</div>
+  <div>
+    <b>Linhas</b>
+    <p>Linhas e itinerários cadastrados</p>
+  </div>
+  <div class="arrow">›</div>
+</div>
+
+<div class="card row">
+  <div class="icon">⚠️</div>
+  <div>
+    <b>Ocorrências</b>
+    <p>Registrar e consultar ocorrências</p>
+  </div>
+  <div class="arrow">›</div>
+</div>
+
+<div class="card row">
+  <div class="icon">📢</div>
+  <div>
+    <b>Avisos</b>
+    <p>Comunicados da operação</p>
+  </div>
+  <div class="arrow">›</div>
+</div>
+
+</div>
+</div>
+</main>
+
+<div class="login" id="login">
+  <div class="box">
+    <h2>🔐 Acesso ao sistema</h2>
+    <p>Entre no MobiBrasil PE Virtual</p>
+
+    <input type="text" id="usuario" placeholder="Usuário">
+    <input type="password" id="senha" placeholder="Senha">
+
+    <button onclick="entrar()">Entrar</button>
+    <button class="secondary" onclick="fecharLogin()">Cancelar</button>
+
+    <p id="erro" class="error"></p>
+  </div>
+</div>
+
+<script>
+function abrirLogin(){
+  document.getElementById("login").style.display = "flex";
+}
+
+function fecharLogin(){
+  document.getElementById("login").style.display = "none";
+}
+
+function entrar(){
+  const usuario = document.getElementById("usuario").value;
+  const senha = document.getElementById("senha").value;
+  const erro = document.getElementById("erro");
+
+  if(usuario === "admin" && senha === "1234"){
+    erro.textContent = "";
+    fecharLogin();
+    alert("Acesso autorizado!");
+  }else{
+    erro.textContent = "Usuário ou senha incorretos.";
+  }
+}
+</script>
+
+</body>
+</html>
