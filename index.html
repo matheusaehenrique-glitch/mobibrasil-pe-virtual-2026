@@ -159,7 +159,7 @@ button{width:100%;padding:13px;margin-top:8px;border:0;border-radius:10px;backgr
 
 </div>
 </div>
-    <div class="card">
+    <div class="card" onclick="abrirBaseMotoristas()" style="cursor:pointer">
   <div class="row">
     <div class="icon">👨‍✈️</div>
     <div>
@@ -202,7 +202,7 @@ button{width:100%;padding:13px;margin-top:8px;border:0;border-radius:10px;backgr
   <script type="module">
   // Import the functions you need from the SDKs you need
   import { initializeApp } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
-import { getFirestore, doc, setDoc, getDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
+import { getFirestore, doc, setDoc, getDoc, getDocs, collection, serverTimestamp } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
 import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
   // TODO: Add SDKs for Firebase products that you want to use
   // https://firebase.google.com/docs/web/setup#available-libraries
@@ -226,7 +226,9 @@ window.doc = doc;
 window.setDoc = setDoc;
     window.getDoc = getDoc;
 window.signInWithEmailAndPassword = signInWithEmailAndPassword;
-    </script>
+    window.getDocs = getDocs;
+window.collection = collection;
+  </script>
 <script> function abrirOperacao(){
   alert("Operação Regular\n\nLinha: 1913\nVeículo: 1.816\nRota: TI PE-15 / TI Joana Bezerra");
 }
@@ -278,7 +280,49 @@ if(novaEscala && novaEscala.trim() !== ""){
     }
 }
   }
-async function buscarVeiculo(numero){
+async function abrirBaseMotoristas(){
+  const lista = document.getElementById("motoristasLista");
+
+  lista.innerHTML = "<p>Carregando motoristas...</p>";
+
+  try {
+    const consulta = await window.getDocs(
+      window.collection(window.db, "motoristas")
+    );
+
+    lista.innerHTML = "";
+
+    if(consulta.empty){
+      lista.innerHTML = "<p>Nenhum motorista cadastrado.</p>";
+      return;
+    }
+
+    consulta.forEach((docMotorista) => {
+      const motorista = docMotorista.data();
+
+      const card = document.createElement("div");
+      card.className = "card";
+      card.style.cursor = "pointer";
+
+      card.innerHTML =
+        "<b>👤 " + (motorista.nome || "Sem nome") + "</b>" +
+        "<p>🪪 Matrícula: " + (motorista.matrícula || docMotorista.id) + "</p>" +
+        "<p>● " + (motorista.status || "Sem status") +
+        " • 🕐 " + (motorista.horario || "Sem horário") + "</p>";
+
+      card.onclick = function(){
+        abrirMotorista(docMotorista.id, motorista);
+      };
+
+      lista.appendChild(card);
+    });
+
+  } catch(erro) {
+    console.error(erro);
+    lista.innerHTML = "<p>❌ Erro ao carregar os motoristas.</p>";
+  }
+}
+  async function buscarVeiculo(numero){
   const veiculo = numero.toString().replace(/\./g, "").trim();
 
   const grupos = [
@@ -310,6 +354,66 @@ async function buscarVeiculo(numero){
     "Faixa: " + grupo.inicio + " - " + grupo.fim
   );
 }
+  function abrirMotorista(id, motorista){
+  const lista = document.getElementById("motoristasLista");
+
+  lista.innerHTML = `
+    <div class="card">
+
+      <h2>👤 ${motorista.nome || "Sem nome"}</h2>
+
+      <p>
+        <b>Matrícula:</b>
+        ${motorista.matrícula || id}
+      </p>
+
+      <p>
+        <b>Status:</b>
+        ${motorista.status || "Sem status"}
+      </p>
+
+      <p>
+        <b>🕐 Horário:</b>
+        ${motorista.horario || "Sem horário"}
+      </p>
+
+      <hr>
+
+      <h3>🚌 Veículo</h3>
+
+      <select id="veiculoSelecionado">
+        <option value="">Selecione o ônibus</option>
+        <option value="2402">2402</option>
+        <option value="2403">2403</option>
+        <option value="2404">2404</option>
+        <option value="2405">2405</option>
+      </select>
+
+      <div id="modeloVeiculo" style="margin-top:10px;"></div>
+
+      <h3 style="margin-top:20px;">🛣️ Linha</h3>
+
+      <select id="linhaSelecionada">
+        <option value="">Selecione a linha</option>
+        <option value="1913">1913</option>
+        <option value="1937">1937</option>
+        <option value="1909">1909</option>
+        <option value="1964">1964</option>
+      </select>
+
+      <div id="nomeLinha" style="margin-top:10px;"></div>
+
+    </div>
+  `;
+
+  document.getElementById("veiculoSelecionado").onchange = function(){
+    buscarVeiculoSelecionado(this.value);
+  };
+
+  document.getElementById("linhaSelecionada").onchange = function(){
+    buscarLinhaSelecionada(this.value);
+  };
+  }
   async function entrar(){
   
     const usuario = document.getElementById("usuario").value.trim();
