@@ -213,9 +213,7 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
 window.serverTimestamp = serverTimestamp;
 window.doc = doc;
 window.setDoc = setDoc;
-window.signInWithEmailAndPassword = function(auth, email, senha) {
-  return signInWithEmailAndPassword(window.auth, email, senha);
-};
+window.signInWithEmailAndPassword = signInWithEmailAndPassword;
     </script>
 <script> function abrirOperacao(){
   alert("Operação Regular\n\nLinha: 1913\nVeículo: 1.816\nRota: TI PE-15 / TI Joana Bezerra");
