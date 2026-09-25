@@ -212,6 +212,7 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
     const app = initializeApp(firebaseConfig);
   window.auth = getAuth(app);
   window.db = getFirestore(app);
+    window.serverTimestamp = serverTimestamp;
 window.signInWithEmailAndPassword = signInWithEmailAndPassword;
     </script>
 <script> function abrirOperacao(){
@@ -248,8 +249,8 @@ if(novaEscala && novaEscala.trim() !== ""){
         await setDoc(
             doc(window.db, "escalas", "operacao"),
             {
-                escala: novaEscala.trim(),
-                alteradoEm: dataHora
+    escala: novaEscala.trim(),
+    alteradoEm: window.serverTimestamp()
             }
         );
 
