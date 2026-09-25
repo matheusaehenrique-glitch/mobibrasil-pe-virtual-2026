@@ -621,20 +621,23 @@ window.iniciarOperacao = iniciarOperacao;
 function fecharLogin(){
   document.getElementById("login").style.display = "none";
 }
+
+window.fecharLogin = fecharLogin;
+
 function abrirPerfil(){
   document.getElementById("perfil").style.display = "flex";
 }
 
 function fecharPerfil(){
   document.getElementById("perfil").style.display = "none";
-  }
+}
 
   async function alterarEscala(){
   if(localStorage.getItem("perfil") !== "admin"){
     alert("🔒 Acesso restrito!\n\nSomente administradores podem alterar a escala.");
     return;
   }
-
+  
   const novaEscala = prompt("Digite a nova escala:");
 
 if(novaEscala && novaEscala.trim() !== ""){
