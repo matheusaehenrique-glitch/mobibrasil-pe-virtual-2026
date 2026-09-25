@@ -286,6 +286,7 @@ async function abrirBaseMotoristas(){
   lista.innerHTML = "<p>Carregando motoristas...</p>";
 
   try {
+    alert("🔎 Tentando carregar motoristas...");
     const consulta = await window.getDocs(
       window.collection(window.db, "motoristas")
     );
