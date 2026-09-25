@@ -502,7 +502,23 @@ if(escalaSnap.exists()){
     alert("⚠️ Selecione o veículo e a linha antes de confirmar.");
     return;
   }
+const escalaAnteriorRef = window.doc(
+  window.db,
+  "escalasMotoristas",
+  motoristaId
+);
 
+const escalaAnteriorSnap = await window.getDoc(escalaAnteriorRef);
+
+let veiculoAnterior = "Sem veículo";
+let linhaAnterior = "Sem linha";
+
+if(escalaAnteriorSnap.exists()){
+  const escalaAnterior = escalaAnteriorSnap.data();
+
+  veiculoAnterior = escalaAnterior.veiculo || "Sem veículo";
+  linhaAnterior = escalaAnterior.linha || "Sem linha";
+  }
   try {
 
   await window.setDoc(
