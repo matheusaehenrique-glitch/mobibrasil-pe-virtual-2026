@@ -456,6 +456,42 @@ card.dataset.motoristaId = docMotorista.id;
     alert("⚠️ Opção inválida.");
   }
   }
+  async function excluirMotorista(motoristaId){
+
+  const confirmar = confirm(
+    "⚠️ EXCLUIR MOTORISTA?\n\n" +
+    "Essa ação irá excluir o cadastro desse motorista."
+  );
+
+  if(!confirmar){
+    return;
+  }
+
+  try {
+
+    await window.setDoc(
+      window.doc(window.db, "motoristas", motoristaId),
+      {
+        status: "Excluído"
+      },
+      { merge: true }
+    );
+
+    alert("✅ Motorista excluído com sucesso.");
+
+    abrirBaseMotoristas();
+
+  } catch(erro){
+
+    console.error(erro);
+
+    alert(
+      "❌ Não foi possível excluir o motorista.\n\n" +
+      erro.message
+    );
+
+  }
+  }
   async function buscarVeiculo(numero){
   const veiculo = numero.toString().replace(/\./g, "").trim();
 
