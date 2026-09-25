@@ -349,6 +349,8 @@ lista.innerHTML = "";
   );
 }
   function abrirMotorista(id, motorista){
+    window.motoristaSelecionadoId = id;
+window.motoristaSelecionado = motorista;
   const lista = document.getElementById("motoristasLista");
 
   lista.innerHTML = `
