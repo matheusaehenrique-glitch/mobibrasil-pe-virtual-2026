@@ -279,13 +279,11 @@ async function entrar(){
   }
 
   try {
-    alert("Cheguei na autenticação do Firebase!");
     const resultado = await window.signInWithEmailAndPassword(
-      window.auth,
-      usuario,
-      senha
-    );
-
+        window.auth,
+        usuario,
+        senha
+    ):
     const user = resultado.user;
 
     localStorage.setItem("usuarioUid", user.uid);
