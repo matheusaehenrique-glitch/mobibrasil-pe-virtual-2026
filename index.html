@@ -204,8 +204,7 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
     projectId: "mobibrasil-pe-virtual",
     storageBucket: "mobibrasil-pe-virtual.firebasestorage.app",
     messagingSenderId: "20078213852",
-    appId: "1:20078213852:web:a99ecdab91221a7cfa1219",
-    measurementId:
+    appId: "1:20078213852:web:a99ecdab91221a7cfa1219"
 
   // Initialize Firebase
     const app = initializeApp(firebaseConfig);
@@ -215,7 +214,7 @@ window.serverTimestamp = serverTimestamp;
 window.doc = doc;
 window.setDoc = setDoc;
 window.signInWithEmailAndPassword = function(auth, email, senha) {
-  return signInWithEmailAndPassword(auth, email, senha);
+  return signInWithEmailAndPassword(window.auth, email, password);
 };
     </script>
 <script> function abrirOperacao(){
