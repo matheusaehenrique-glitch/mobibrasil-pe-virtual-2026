@@ -466,13 +466,38 @@ window.motoristaSelecionado = motorista;
     return;
   }
 
+  try {
+
+  await window.setDoc(
+    window.doc(window.db, "escalasMotoristas", motoristaId),
+    {
+      motoristaId: motoristaId,
+      nome: motorista.nome || "Sem nome",
+      matricula: motoristaId,
+      veiculo: veiculo,
+      linha: linha,
+      alteradoEm: window.serverTimestamp()
+    }
+  );
+
   alert(
-    "✅ Dados prontos para salvar!\n\n" +
+    "✅ ESCALA SALVA COM SUCESSO!\n\n" +
     "Motorista: " + (motorista.nome || "Sem nome") + "\n" +
     "Matrícula: " + motoristaId + "\n" +
     "Veículo: " + veiculo + "\n" +
     "Linha: " + linha
   );
+
+} catch (erro) {
+
+  console.error(erro);
+
+  alert(
+    "❌ Não foi possível salvar a escala.\n\n" +
+    erro.message
+  );
+
+  }
   }
   function buscarLinhaSelecionada(numero){
   const nomeLinha = document.getElementById("nomeLinha");
