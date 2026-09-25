@@ -1139,7 +1139,10 @@ if(perfilSnap.exists()){
   }
     erro.textContent = "";
 
-    document.getElementById("btnEscala").style.display = "block";
+    const btnEscala = document.getElementById("btnEscala");
+if(btnEscala){
+  btnEscala.style.display = "block";
+}
 
     fecharLogin();
 
