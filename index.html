@@ -320,16 +320,20 @@ lista.innerHTML = "";
   card.style.cursor = "pointer";
 
   card.innerHTML =
+  "<div style='display:flex;justify-content:space-between;align-items:center;'>" +
     "<b>👤 " + (motorista.nome || "Sem nome") + "</b>" +
-    "<p>🪪 Matrícula: " + (motorista.matricula || docMotorista.id) + "</p>" +
-    "<p>● " + (motorista.status || "Sem status") + "</p>" +
-    "<p>🚌 Veículo: " + (escala.veiculo || "Sem veículo") + "</p>" +
-    "<p>🛣️ Linha: " + (escala.linha || "Sem linha") + "</p>" +
-    "<p>🕐 Alterada em: " + horario + "</p>";
+    "<button type='button' onclick='event.stopPropagation(); abrirMenuMotorista(this)' " +
+    "style='background:none;border:none;color:white;font-size:28px;cursor:pointer;'>⋮</button>" +
+  "</div>" +
+  "<p>🪪 Matrícula: " + (motorista.matricula || docMotorista.id) + "</p>" +
+  "<p>● " + (motorista.status || "Sem status") + "</p>" +
+  "<p>🚌 Veículo: " + (escala.veiculo || "Sem veículo") + "</p>" +
+  "<p>🛣️ Linha: " + (escala.linha || "Sem linha") + "</p>" +
+  "<p>🕐 Alterada em: " + horario + "</p>";
 
-  card.onclick = function(){
-    abrirMotorista(docMotorista.id, motorista);
-  };
+card.onclick = function(){
+  abrirMotorista(docMotorista.id, motorista);
+};
 
   lista.appendChild(card);
     }
