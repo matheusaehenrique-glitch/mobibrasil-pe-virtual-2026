@@ -303,7 +303,7 @@ async function entrar(){
   } catch (error) {
     console.error(error);
 
-    erro.textContent = "E-mail ou senha incorretos.";
+   alert("ERRO DO FIREBASE:\n" + error.code + "\n\n" + error.message);
   }
 }
 </script>
