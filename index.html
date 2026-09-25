@@ -192,6 +192,7 @@ button{width:100%;padding:13px;margin-top:8px;border:0;border-radius:10px;backgr
   // Import the functions you need from the SDKs you need
   import { initializeApp } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
   import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
+import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
   // TODO: Add SDKs for Firebase products that you want to use
   // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -210,6 +211,8 @@ button{width:100%;padding:13px;margin-top:8px;border:0;border-radius:10px;backgr
   // Initialize Firebase
   const app = initializeApp(firebaseCon
   window.db = getFirestore(app);
+    window.auth = getAuth(app);
+window.signInWithEmailAndPassword = signInWithEmailAndPassword;
     </script>
 <script> function abrirOperacao(){
   alert("Operação Regular\n\nLinha: 1913\nVeículo: 1.816\nRota: TI PE-15 / TI Joana Bezerra");
@@ -263,23 +266,46 @@ if(novaEscala && novaEscala.trim() !== ""){
 }
   }
 
-function entrar(){
+async function entrar(){
   const usuario = document.getElementById("usuario").value.trim();
   const senha = document.getElementById("senha").value;
   const erro = document.getElementById("erro");
   const painel = document.getElementById("painel");
 
-  if(usuario === "admin" && senha === "1234"){
-    localStorage.setItem("perfil", "admin");
-    document.getElementById("btnEscala").style.display = "block";
+  erro.textContent = "";
+
+  if(usuario === "" || senha === ""){
+    erro.textContent = "Digite o e-mail e a senha.";
+    return;
+  }
+
+  try {
+    const resultado = await window.signInWithEmailAndPassword(
+      window.auth,
+      usuario,
+      senha
+    );
+
+    const user = resultado.user;
+
+    localStorage.setItem("usuarioUid", user.uid);
+
     erro.textContent = "";
+
+    document.getElementById("btnEscala").style.display = "block";
+
     fecharLogin();
 
     if(painel){
       painel.style.display = "block";
     }
-  }else{
-    erro.textContent = "Usuário ou senha incorretos.";
+
+    alert("✅ Login realizado com sucesso!\n\nBem-vindo ao MobiBrasil PE Virtual.");
+
+  } catch (error) {
+    console.error(error);
+
+    erro.textContent = "E-mail ou senha incorretos.";
   }
 }
 </script>
