@@ -449,7 +449,30 @@ window.motoristaSelecionado = motorista;
     "<br>📋 <b>Modelo:</b> " + grupo.nome;
   }
   async function confirmarEscalaMotorista(){
-  alert("✅ Botão funcionando!\n\nAgora vamos programar o salvamento da escala.");
+
+  const motoristaId = window.motoristaSelecionadoId;
+  const motorista = window.motoristaSelecionado;
+
+  const veiculo = document.getElementById("veiculoSelecionado").value;
+  const linha = document.getElementById("linhaSelecionada").value;
+
+  if(!motoristaId || !motorista){
+    alert("⚠️ Nenhum motorista selecionado.");
+    return;
+  }
+
+  if(!veiculo || !linha){
+    alert("⚠️ Selecione o veículo e a linha antes de confirmar.");
+    return;
+  }
+
+  alert(
+    "✅ Dados prontos para salvar!\n\n" +
+    "Motorista: " + (motorista.nome || "Sem nome") + "\n" +
+    "Matrícula: " + motoristaId + "\n" +
+    "Veículo: " + veiculo + "\n" +
+    "Linha: " + linha
+  );
   }
   function buscarLinhaSelecionada(numero){
   const nomeLinha = document.getElementById("nomeLinha");
