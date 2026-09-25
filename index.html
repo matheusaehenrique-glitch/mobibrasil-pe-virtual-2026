@@ -181,7 +181,7 @@ button{width:100%;padding:13px;margin-top:8px;border:0;border-radius:10px;backgr
     <input type="text" id="usuario" placeholder="Usuário">
     <input type="password" id="senha" placeholder="Senha">
 
-    <button type="button" onclick="alert('TESTE DO BOTÃO')">Entrar</button>
+    <button type="button" onclick="window.entrar()">Entrar</button>
     <button class="secondary" onclick="fecharLogin()">Cancelar</button>
 
     <p id="erro" class="error"></p>
@@ -210,8 +210,8 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
 
   // Initialize Firebase
   const app = initializeApp(firebaseCon
+  window.auth = getAuth(app);
   window.db = getFirestore(app);
-    window.auth = getAuth(app);
 window.signInWithEmailAndPassword = signInWithEmailAndPassword;
     </script>
 <script> function abrirOperacao(){
@@ -308,7 +308,7 @@ async function entrar(){
    alert("ERRO DO FIREBASE:\n" + error.code + "\n\n" + error.message);
   }
 }
+  window.entrar = entrar;
 </script>
 </body>
-  
 </html>
