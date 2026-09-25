@@ -448,6 +448,32 @@ async function abrirBaseMotoristas(){
     "🚍 <b>Veículo:</b> " + numero +
     "<br>📋 <b>Modelo:</b> " + grupo.nome;
   }
+  function buscarLinhaSelecionada(numero){
+  const nomeLinha = document.getElementById("nomeLinha");
+
+  if(numero === ""){
+    nomeLinha.innerHTML = "";
+    return;
+  }
+
+  const linhas = {
+    "1913": "TI PE-15 / Joana Bezerra",
+    "1937": "TI Abreu e Lima / Nova Aurora",
+    "1909": "TI Pelópidas Silveira / Recife",
+    "1964": "Linha BR-101"
+  };
+
+  const nome = linhas[numero];
+
+  if(!nome){
+    nomeLinha.innerHTML = "⚠️ Linha não encontrada na base.";
+    return;
+  }
+
+  nomeLinha.innerHTML =
+    "🛣️ <b>Linha:</b> " + numero +
+    "<br>📋 <b>Nome:</b> " + nome;
+  }
   async function entrar(){
   
     const usuario = document.getElementById("usuario").value.trim();
