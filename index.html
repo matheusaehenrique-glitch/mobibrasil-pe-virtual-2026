@@ -213,7 +213,8 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
   window.auth = getAuth(app);
   window.db = getFirestore(app);
     window.serverTimestamp = serverTimestamp;
-window.signInWithEmailAndPassword = signInWithEmailAndPassword;
+window.doc = doc; window.signInWithEmailAndPassword = signInWithEmailAndPassword;
+    window.getDoc = getDoc;
     </script>
 <script> function abrirOperacao(){
   alert("Operação Regular\n\nLinha: 1913\nVeículo: 1.816\nRota: TI PE-15 / TI Joana Bezerra");
