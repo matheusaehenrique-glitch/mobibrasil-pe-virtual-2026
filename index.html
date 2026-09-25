@@ -40,137 +40,430 @@ button{width:100%;padding:13px;margin-top:8px;border:0;border-radius:10px;backgr
 <div class="brand">MOBIBRASIL PE VIRTUAL<small>PORTAL OPERACIONAL</small></div>
 </header>
 
-  <main id="painel">
+<main id="painel">
 
-<div class="card profile" onclick="abrirPerfil()">
-<div class="avatar">MM</div>
-<div>
-<h2>Olá, Matheus Mello</h2>
-<p>Administrador Geral</p>
-<p><span class="online">● ATIVO</span> • Acesso administrativo</p>
-</div>
-<div class="arrow">›</div>
-</div>
+  <!-- MENU RÁPIDO -->
+  <div style="
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:10px;
+    margin-bottom:15px;
+  ">
 
-<div class="card action">
-<div class="icon">✓</div>
-<div>
-<div class="cap">PRÓXIMA AÇÃO</div>
-<b>Realizar vistoria regular</b>
-<div class="sub">Escala disponível • envie a vistoria para análise</div>
-</div>
-</div>
+    <button type="button">
+      🏠 Início
+    </button>
 
-<div class="card" onclick="abrirOperacao()">
-<span class="badge">ESCALADO</span>
-<h3>🚌 Operação Regular</h3>
-<div class="tags">
-<span class="tag">⇆ Linha 1913</span>
-<span class="tag" onclick="buscarVeiculo('2402')">▣ Veículo 2.402</span>
-</div>
-<div class="route">TI PE-15 / TI Joana Bezerra</div>
-<button id="btnEscala" type="button" style="display:none;" onclick="event.stopPropagation(); alterarEscala()">
-  🔐 Alterar escala
-</button></div>
+    <button type="button" onclick="abrirBaseMotoristas()">
+      👨‍✈️ Motoristas
+    </button>
 
-<div class="card row">
-<div class="icon">☑</div>
-<div><b>Vistoria</b><p>Checklisat e análise do veículo</p></div>
-<div class="arrow">›</div>
-</div>
+    <button type="button">
+      📋 Escalas
+    </button>
 
-<div class="card row">
-<div class="icon">⚙</div>
-<div><b>Extra</b><p>Sem operação ativa</p></div>
-<div class="arrow">›</div>
-</div>
+    <button type="button">
+      🚌 Frota
+    </button>
 
-<div class="card row">
-<div class="icon">☾</div>
-<div><b>Bacurau</b><p>Operação disponível entre 00h00 e 05h00</p></div>
-<div class="arrow">›</div>
-</div>
-
-<div class="card row">
-<div class="icon">♆</div>
-<div><b>TBT</b><p>Sem operação ativa</p></div>
-<div class="arrow">›</div>
-</div>
-
-<div class="card row admin" id="painelAdmin">
-<div>
-<h3>👑 Painel do Administrador Geral</h3>
-<p>Gerencie funcionários
-</p>
-
-<div class="card row">
-  <div class="icon">👥</div>
-  <div>
-    <b>Funcionários</b>
-    <p>Gerenciar usuários e funções</p>
   </div>
-  <div class="arrow">›</div>
-</div>
 
-<div class="card row">
-  <div class="icon">🚌</div>
-  <div>
-    <b>Veículos</b>
-    <p>Cadastro e controle da frota</p>
-  </div>
-  <div class="arrow">›</div>
-</div>
 
-<div class="card row">
-  <div class="icon">📋</div>
-  <div>
-    <b>Escalas</b>
-    <p>Consultar e organizar escalas</p>
-  </div>
-  <div class="arrow">›</div>
-</div>
+  <!-- PERFIL DO ADMINISTRADOR -->
 
-<div class="card row">
-  <div class="icon">🛣️</div>
-  <div>
-    <b>Linhas</b>
-    <p>Linhas e itinerários cadastrados</p>
-  </div>
-  <div class="arrow">›</div>
-</div>
+  <div class="card profile">
 
-<div class="card row">
-  <div class="icon">⚠️</div>
-  <div>
-    <b>Ocorrências</b>
-    <p>Registrar e consultar ocorrências</p>
-  </div>
-  <div class="arrow">›</div>
-</div>
+    <div class="avatar">MM</div>
 
-<div class="card row">
-  <div class="icon">📢</div>
-  <div>
-    <b>Avisos</b>
-    <p>Comunicados da operação</p>
-  </div>
-  <div class="arrow">›</div>
-</div>
-
-</div>
-</div>
-    <div class="card">
-  <div class="row">
-    <div class="icon">👨‍✈️</div>
     <div>
-      <b>Base de Motoristas</b>
-      <p>Cadastro e acompanhamento dos motoristas</p>
+      <h2>Olá, Matheus Mello!</h2>
+      <p>Painel Administrativo</p>
+      <p>
+        <span class="online">● ATIVO</span>
+        • Acesso administrativo
+      </p>
     </div>
+
   </div>
-<button type="button" onclick="abrirBaseMotoristas()">👨‍✈️ Abrir Base de Motoristas</button>
-  <div id="motoristasLista" style="margin-top:15px;"></div>
+
+
+  <!-- RESUMO -->
+
+  <div style="
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:10px;
+  ">
+
+    <div class="card" style="margin:0;">
+      <div style="font-size:25px;">👨‍✈️</div>
+      <h2 style="margin:8px 0 2px;">32</h2>
+      <p style="margin:0;">Motoristas ativos</p>
     </div>
-</main>
+
+    <div class="card" style="margin:0;">
+      <div style="font-size:25px;">🚌</div>
+      <h2 style="margin:8px 0 2px;">42</h2>
+      <p style="margin:0;">Veículos disponíveis</p>
+    </div>
+
+    <div class="card" style="margin:0;">
+      <div style="font-size:25px;">📋</div>
+      <h2 style="margin:8px 0 2px;">24</h2>
+      <p style="margin:0;">Escalas de hoje</p>
+    </div>
+
+    <div class="card" style="margin:0;">
+      <div style="font-size:25px;">⚠️</div>
+      <h2 style="margin:8px 0 2px;">3</h2>
+      <p style="margin:0;">Ocorrências abertas</p>
+    </div>
+
+  </div>
+
+
+  <!-- ESCALA DO DIA -->
+
+  <div class="card" style="margin-top:12px;">
+
+    <div class="row">
+
+      <div>
+        <h2 style="margin:0;">📋 Escala do dia</h2>
+        <p>Visualização rápida da operação</p>
+      </div>
+
+      <div class="arrow">›</div>
+
+    </div>
+
+    <div style="overflow-x:auto;margin-top:12px;">
+
+      <table style="
+        width:100%;
+        border-collapse:collapse;
+        min-width:600px;
+      ">
+
+        <tr style="color:#8ea3af;">
+
+          <th style="padding:9px;text-align:left;">
+            Horário
+          </th>
+
+          <th style="padding:9px;text-align:left;">
+            Motorista
+          </th>
+
+          <th style="padding:9px;text-align:left;">
+            Linha
+          </th>
+
+          <th style="padding:9px;text-align:left;">
+            Veículo
+          </th>
+
+          <th style="padding:9px;text-align:left;">
+            Status
+          </th>
+
+        </tr>
+
+        <tr>
+
+          <td style="padding:9px;">
+            05:30
+          </td>
+
+          <td style="padding:9px;">
+            João Pedro
+          </td>
+
+          <td style="padding:9px;">
+            1909
+          </td>
+
+          <td style="padding:9px;">
+            1463
+          </td>
+
+          <td style="padding:9px;">
+            🟢 Confirmada
+          </td>
+
+        </tr>
+
+        <tr>
+
+          <td style="padding:9px;">
+            06:20
+          </td>
+
+          <td style="padding:9px;">
+            Matheus Souza
+          </td>
+
+          <td style="padding:9px;">
+            1964
+          </td>
+
+          <td style="padding:9px;">
+            1705
+          </td>
+
+          <td style="padding:9px;">
+            🟢 Confirmada
+          </td>
+
+        </tr>
+
+        <tr>
+
+          <td style="padding:9px;">
+            07:10
+          </td>
+
+          <td style="padding:9px;">
+            Carlos Lima
+          </td>
+
+          <td style="padding:9px;">
+            1988
+          </td>
+
+          <td style="padding:9px;">
+            1724
+          </td>
+
+          <td style="padding:9px;">
+            🔵 Em andamento
+          </td>
+
+        </tr>
+
+        <tr>
+
+          <td style="padding:9px;">
+            08:00
+          </td>
+
+          <td style="padding:9px;">
+            Gabriel Alves
+          </td>
+
+          <td style="padding:9px;">
+            2493
+          </td>
+
+          <td style="padding:9px;">
+            2550
+          </td>
+
+          <td style="padding:9px;">
+            🟡 Pendente
+          </td>
+
+        </tr>
+
+      </table>
+
+    </div>
+
+  </div>
+
+
+  <!-- AÇÕES RÁPIDAS -->
+
+  <div style="
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:10px;
+  ">
+
+    <button type="button">
+      📋 Gerenciar Escalas
+    </button>
+
+    <button
+      type="button"
+      style="background:#7d3040;">
+      ⚠️ Ocorrência
+    </button>
+
+    <button
+      type="button"
+      style="background:#49358a;">
+      📢 Comunicado
+    </button>
+
+    <button
+      type="button"
+      style="background:#73552b;">
+      💡 Sugestão
+    </button>
+
+  </div>
+
+
+  <!-- BASE DE MOTORISTAS -->
+
+  <div class="card" style="margin-top:12px;">
+
+    <div class="row">
+
+      <div>
+        <h2 style="margin:0;">
+          👨‍✈️ Motoristas
+        </h2>
+
+        <p>
+          Cadastro e acompanhamento dos motoristas
+        </p>
+      </div>
+
+      <div class="arrow">
+        ›
+      </div>
+
+    </div>
+
+    <button
+      type="button"
+      onclick="abrirBaseMotoristas()">
+
+      👨‍✈️ Abrir Base de Motoristas
+
+    </button>
+
+    <div
+      id="motoristasLista"
+      style="margin-top:15px;">
+    </div>
+
+  </div>
+
+
+  <!-- OCORRÊNCIAS -->
+
+  <div class="card">
+
+    <div class="row">
+
+      <div>
+        <h2 style="margin:0;">
+          ⚠️ Ocorrências recentes
+        </h2>
+
+        <p>
+          Acompanhamento operacional
+        </p>
+      </div>
+
+      <div class="arrow">
+        ›
+      </div>
+
+    </div>
+
+    <p>
+      🔴 #031 — Falha na suspensão
+      <br>
+      Em análise
+    </p>
+
+    <p>
+      🟡 #030 — Porta não fechando
+      <br>
+      Pendente
+    </p>
+
+    <p>
+      🟢 #029 — Problema no ar-condicionado
+      <br>
+      Resolvido
+    </p>
+
+  </div>
+
+
+  <!-- COMUNICADOS -->
+
+  <div class="card">
+
+    <div class="row">
+
+      <div>
+
+        <h2 style="margin:0;">
+          📢 Comunicados recentes
+        </h2>
+
+        <p>
+          Informações importantes da operação
+        </p>
+
+      </div>
+
+      <div class="arrow">
+        ›
+      </div>
+
+    </div>
+
+    <p>
+      🟢 Alteração de linha
+    </p>
+
+    <p>
+      🟢 Chegada de novos veículos
+    </p>
+
+    <p>
+      🟡 Atualização operacional
+    </p>
+
+  </div>
+
+
+  <!-- FROTA -->
+
+  <div class="card">
+
+    <div class="row">
+
+      <div>
+
+        <h2 style="margin:0;">
+          🚌 Frota
+        </h2>
+
+        <p>
+          Veículos cadastrados na operação
+        </p>
+
+      </div>
+
+      <div class="arrow">
+        ›
+      </div>
+
+    </div>
+
+    <p>
+      🚌 2402 — Caio Apache VIP V
+    </p>
+
+    <p>
+      🚌 2404 — Caio Apache VIP V
+    </p>
+
+    <p>
+      🚌 2301 — Mercedes-Benz O500R
+    </p>
+
+  </div>
+
+      </main>
 <div class="login" id="perfil" style="display:none">
   <div class="box">
     <h2>👤 Perfil administrativo</h2>
