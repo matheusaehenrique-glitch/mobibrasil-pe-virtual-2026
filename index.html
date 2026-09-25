@@ -260,8 +260,8 @@ if(novaEscala && novaEscala.trim() !== ""){
     const dataHora = agora.toLocaleString("pt-BR");
 
     try {
-        await setDoc(
-            doc(window.db, "escalas", "operacao"),
+        await window.setDoc(
+    window.doc(window.db, "escalas", "operacao"),
             {
     escala: novaEscala.trim(),
     alteradoEm: window.serverTimestamp()
