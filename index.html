@@ -318,13 +318,12 @@ lista.innerHTML = "";
   const card = document.createElement("div");
   card.className = "card";
   card.style.cursor = "pointer";
-
+card.dataset.motoristaId = docMotorista.id;
   card.innerHTML =
   "<div style='display:flex;justify-content:space-between;align-items:center;'>" +
-    "<b>👤 " + (motorista.nome || "Sem nome") + "</b>" +
-    "<button type='button' onclick='event.stopPropagation(); abrirMenuMotorista(this)' " +
-    "style='background:none;border:none;color:white;font-size:28px;cursor:pointer;'>⋮</button>" +
-  "</div>" +
+"<b>👤 " + (motorista.nome || "Sem nome") + "</b>" +
+"<button type='button' onclick='abrirMenuMotorista(this);event.stopPropagation();' style='background:none;border:none;color:white;font-size:28px;cursor:pointer;'>⋮</button>" +
+"</div>" +
   "<p>🪪 Matrícula: " + (motorista.matricula || docMotorista.id) + "</p>" +
   "<p>● " + (motorista.status || "Sem status") + "</p>" +
   "<p>🚌 Veículo: " + (escala.veiculo || "Sem veículo") + "</p>" +
@@ -343,6 +342,40 @@ card.onclick = function(){
     lista.innerHTML = "<p>❌ Erro ao carregar os motoristas.</p>";
   }
 }
+  function abrirMenuMotorista(botao){
+  const motoristaId = botao.closest(".card").dataset.motoristaId;
+
+  const menu = document.createElement("div");
+
+  menu.style.position = "fixed";
+  menu.style.background = "#102536";
+  menu.style.border = "1px solid #234";
+  menu.style.borderRadius = "12px";
+  menu.style.padding = "8px";
+  menu.style.zIndex = "9999";
+  menu.style.boxShadow = "0 5px 20px rgba(0,0,0,.4)";
+
+  menu.innerHTML =
+    "<button onclick='verHistoricoMotorista(\"" + motoristaId + "\")'>📋 Histórico</button>" +
+    "<button onclick='mudarCargoMotorista(\"" + motoristaId + "\")'>🔄 Mudar de cargo</button>" +
+    "<button onclick='excluirMotorista(\"" + motoristaId + "\")'>🗑️ Excluir</button>";
+
+  document.body.appendChild(menu);
+
+  const rect = botao.getBoundingClientRect();
+
+  menu.style.top = (rect.bottom + 5) + "px";
+  menu.style.left = (rect.left - 150) + "px";
+
+  setTimeout(function(){
+    document.addEventListener("click", function fecharMenu(e){
+      if(!menu.contains(e.target) && e.target !== botao){
+        menu.remove();
+        document.removeEventListener("click", fecharMenu);
+      }
+    });
+  }, 0);
+  }
   async function buscarVeiculo(numero){
   const veiculo = numero.toString().replace(/\./g, "").trim();
 
