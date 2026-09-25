@@ -376,6 +376,48 @@ card.dataset.motoristaId = docMotorista.id;
     });
   }, 0);
   }
+  async function verHistoricoMotorista(motoristaId){
+
+  const consulta = await window.getDocs(
+    window.collection(window.db, "historicoEscalas")
+  );
+
+  let historico = [];
+
+  consulta.forEach(docHistorico => {
+    const dados = docHistorico.data();
+
+    if(dados.motoristaId === motoristaId){
+      historico.push(dados);
+    }
+  });
+
+  if(historico.length === 0){
+    alert("📋 Nenhum histórico encontrado para este motorista.");
+    return;
+  }
+
+  let texto = "📋 HISTÓRICO DO MOTORISTA\n\n";
+
+  historico.forEach((item, indice) => {
+
+    let data = "Data não registrada";
+
+    if(item.alteradoEm){
+      data = item.alteradoEm.toDate().toLocaleString("pt-BR");
+    }
+
+    texto +=
+      "Alteração " + (indice + 1) + "\n" +
+      "🚌 Carro anterior: " + (item.veiculoAnterior || "Nenhum") + "\n" +
+      "🚌 Carro novo: " + (item.veiculoNovo || "Nenhum") + "\n" +
+      "🛣️ Linha anterior: " + (item.linhaAnterior || "Nenhuma") + "\n" +
+      "🛣️ Linha nova: " + (item.linhaNova || "Nenhuma") + "\n" +
+      "🕐 Data: " + data + "\n\n";
+  });
+
+  alert(texto);
+  }
   async function buscarVeiculo(numero){
   const veiculo = numero.toString().replace(/\./g, "").trim();
 
