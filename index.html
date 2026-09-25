@@ -304,7 +304,8 @@ lista.innerHTML = "";
         "<p>● " + (motorista.status || "Sem status") +
         " • 🕐 " + (motorista.horario || "Sem horário") + "</p>";
 
-      card.onclick = function(){
+      card.onclick = function(event){
+  event.stopPropagation();
   abrirMotorista(docMotorista.id, motorista);
 };
       lista.appendChild(card);
