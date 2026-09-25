@@ -205,16 +205,16 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
     storageBucket: "mobibrasil-pe-virtual.firebasestorage.app",
     messagingSenderId: "20078213852",
     appId: "1:20078213852:web:a99ecdab91221a7cfa1219",
-    measurementId: "G-M0EBV1TZWQ"
-  };
+    measurementId:
 
   // Initialize Firebase
     const app = initializeApp(firebaseConfig);
   window.auth = getAuth(app);
   window.db = getFirestore(app);
-    window.serverTimestamp = serverTimestamp;
-window.doc = doc; window.signInWithEmailAndPassword = signInWithEmailAndPassword;
-    window.getDoc = getDoc;
+window.serverTimestamp = serverTimestamp;
+window.doc = doc;
+window.setDoc = setDoc;
+window.signInWithEmailAndPassword = signInWithEmailAndPassword;
     </script>
 <script> function abrirOperacao(){
   alert("Operação Regular\n\nLinha: 1913\nVeículo: 1.816\nRota: TI PE-15 / TI Joana Bezerra");
