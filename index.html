@@ -418,6 +418,44 @@ card.dataset.motoristaId = docMotorista.id;
 
   alert(texto);
   }
+  async function mudarCargoMotorista(motoristaId){
+
+  const novoCargo = prompt(
+    "🔄 MUDAR DE CARGO\n\n" +
+    "Digite uma opção:\n\n" +
+    "1 - Motorista\n" +
+    "2 - Administrador"
+  );
+
+  if(novoCargo === "1"){
+    
+    await window.setDoc(
+      window.doc(window.db, "usuarios", motoristaId),
+      {
+        role: "motorista"
+      },
+      { merge: true }
+    );
+
+    alert("✅ Cargo alterado para MOTORISTA.");
+    
+  } else if(novoCargo === "2"){
+    
+    await window.setDoc(
+      window.doc(window.db, "usuarios", motoristaId),
+      {
+        role: "admin"
+      },
+      { merge: true }
+    );
+
+    alert("✅ Cargo alterado para ADMINISTRADOR.");
+    
+  } else if(novoCargo !== null){
+    
+    alert("⚠️ Opção inválida.");
+  }
+  }
   async function buscarVeiculo(numero){
   const veiculo = numero.toString().replace(/\./g, "").trim();
 
