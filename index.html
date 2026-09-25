@@ -290,7 +290,7 @@ async function abrirBaseMotoristas(){
   const consulta = await window.getDocs(
   window.collection(window.db, "motoristas")
 );
-
+lista.innerHTML = "";
     consulta.forEach((docMotorista) => {
       const motorista = docMotorista.data();
 
