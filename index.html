@@ -124,8 +124,8 @@ button{width:100%;padding:13px;margin-top:8px;border:0;border-radius:10px;backgr
     margin-bottom:15px;
   ">
 
-    <button type="button" onclick="window.scrollTo({top:0,behavior:'smooth'})">
-      🏠 Início
+    <button type="button" onclick="voltarInicio()">
+  🏠 Início
     </button>
 
     <button type="button" onclick="abrirBaseMotoristas()">
@@ -599,12 +599,19 @@ window.collection = collection;
 <script> function abrirOperacao(){
   alert("Operação Regular\n\nLinha: 1913\nVeículo: 1.816\nRota: TI PE-15 / TI Joana Bezerra");
 }
+  
 function iniciarOperacao(){
   document.getElementById("inicioTela").style.display = "none";
   document.getElementById("painel").style.display = "block";
   window.scrollTo({top:0,behavior:"smooth"});
 }
+function voltarInicio(){
+  document.getElementById("painel").style.display = "none";
+  document.getElementById("inicioTela").style.display = "flex";
+  window.scrollTo({top:0,behavior:"smooth"});
+}
 
+window.voltarInicio = voltarInicio;
 window.iniciarOperacao = iniciarOperacao;
   function abrirLogin(){
   document.getElementById("login").style.display = "flex";
