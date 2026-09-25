@@ -35,6 +35,80 @@ button{width:100%;padding:13px;margin-top:8px;border:0;border-radius:10px;backgr
 
 <body>
 
+  <!-- TELA INICIAL -->
+<div id="inicioTela" style="
+  min-height:100vh;
+  background:linear-gradient(180deg,#061522,#0b2d45);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+  text-align:center;
+">
+
+  <div style="
+    font-size:32px;
+    font-weight:bold;
+    margin-bottom:18px;
+    letter-spacing:1px;
+  ">
+    MOBIBRASIL
+  </div>
+
+  <div style="
+    width:100%;
+    max-width:700px;
+    border-radius:20px;
+    overflow:hidden;
+    box-shadow:0 10px 35px #0008;
+    border:2px solid #1b9ee0;
+  ">
+    <img
+      src="Imagem-do-WhatsApp-de-2024-05-14-as-23.20.24_96fdcb7b-1024x683.jpg"
+      alt="MobiBrasil PE"
+      style="
+        width:100%;
+        display:block;
+        object-fit:cover;
+      "
+    >
+  </div>
+
+  <h1 style="
+    margin:22px 0 5px;
+    font-size:25px;
+  ">
+    MOBIBRASIL PE VIRTUAL
+  </h1>
+
+  <p style="
+    margin:0 0 20px;
+    color:#9fc4d8;
+    font-size:13px;
+  ">
+    PORTAL OPERACIONAL
+  </p>
+
+  <button
+    type="button"
+    onclick="iniciarOperacao()"
+    style="
+      width:100%;
+      max-width:420px;
+      padding:16px;
+      border-radius:12px;
+      background:linear-gradient(90deg,#087ee8,#159bd5);
+      font-size:16px;
+      font-weight:bold;
+      box-shadow:0 6px 20px #0005;
+    "
+  >
+    ▶ INICIAR OPERAÇÃO
+  </button>
+
+</div>
+
 <header>
 <div class="logo">MB</div>
 <div class="brand">MOBIBRASIL PE VIRTUAL<small>PORTAL OPERACIONAL</small></div>
@@ -525,7 +599,14 @@ window.collection = collection;
 <script> function abrirOperacao(){
   alert("Operação Regular\n\nLinha: 1913\nVeículo: 1.816\nRota: TI PE-15 / TI Joana Bezerra");
 }
-function abrirLogin(){
+function iniciarOperacao(){
+  document.getElementById("inicioTela").style.display = "none";
+  document.getElementById("painel").style.display = "block";
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+
+window.iniciarOperacao = iniciarOperacao;
+  function abrirLogin(){
   document.getElementById("login").style.display = "flex";
 }
 
