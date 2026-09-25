@@ -291,25 +291,48 @@ async function abrirBaseMotoristas(){
   window.collection(window.db, "motoristas")
 );
 lista.innerHTML = "";
-    consulta.forEach((docMotorista) => {
-      const motorista = docMotorista.data();
+    for (const docMotorista of consulta.docs) {
 
-      const card = document.createElement("div");
-      card.className = "card";
-      card.style.cursor = "pointer";
+  const motorista = docMotorista.data();
 
-      card.innerHTML =
-        "<b>👤 " + (motorista.nome || "Sem nome") + "</b>" +
-        "<p>🪪 Matrícula: " + (motorista.matrícula || docMotorista.id) + "</p>" +
-        "<p>● " + (motorista.status || "Sem status") +
-        " • 🕐 " + (motorista.horario || "Sem horário") + "</p>";
+  const escalaRef = window.doc(
+    window.db,
+    "escalasMotoristas",
+    docMotorista.id
+  );
 
-      card.onclick = function(event){
-  event.stopPropagation();
-  abrirMotorista(docMotorista.id, motorista);
-};
-      lista.appendChild(card);
-    });
+  const escalaSnap = await window.getDoc(escalaRef);
+
+  let escala = {};
+
+  if (escalaSnap.exists()) {
+    escala = escalaSnap.data();
+  }
+
+  let horario = "Sem escala";
+
+  if (escala.alteradoEm) {
+    horario = escala.alteradoEm.toDate().toLocaleString("pt-BR");
+  }
+
+  const card = document.createElement("div");
+  card.className = "card";
+  card.style.cursor = "pointer";
+
+  card.innerHTML =
+    "<b>👤 " + (motorista.nome || "Sem nome") + "</b>" +
+    "<p>🪪 Matrícula: " + (motorista.matricula || docMotorista.id) + "</p>" +
+    "<p>● " + (motorista.status || "Sem status") + "</p>" +
+    "<p>🚌 Veículo: " + (escala.veiculo || "Sem veículo") + "</p>" +
+    "<p>🛣️ Linha: " + (escala.linha || "Sem linha") + "</p>" +
+    "<p>🕐 Alterada em: " + horario + "</p>";
+
+  card.onclick = function(){
+    abrirMotorista(docMotorista.id, motorista);
+  };
+
+  lista.appendChild(card);
+    }
 
   } catch(erro) {
     console.error(erro);
