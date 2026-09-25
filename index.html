@@ -328,7 +328,7 @@ card.dataset.motoristaId = docMotorista.id;
   "<p>● " + (motorista.status || "Sem status") + "</p>" +
   "<p>🚌 Veículo: " + (escala.veiculo || "Sem veículo") + "</p>" +
   "<p>🛣️ Linha: " + (escala.linha || "Sem linha") + "</p>" +
-  "<p>🕐 Alterada em: " + horario + "</p>
+  "<p>🕐 Alterada em: " + horario + "</p>";
     card.onclick = function(event){
   if(event.target.closest("button")) return;
   abrirMotorista(docMotorista.id, motorista);
