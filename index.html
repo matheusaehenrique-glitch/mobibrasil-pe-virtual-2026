@@ -413,6 +413,41 @@ async function abrirBaseMotoristas(){
     buscarLinhaSelecionada(this.value);
   };
   }
+  function buscarVeiculoSelecionado(numero){
+  const modelo = document.getElementById("modeloVeiculo");
+
+  if(numero === ""){
+    modelo.innerHTML = "";
+    return;
+  }
+
+  const grupos = [
+    {
+      inicio: 2301,
+      fim: 2331,
+      nome: "Mercedes-Benz O500R"
+    },
+    {
+      inicio: 2400,
+      fim: 2499,
+      nome: "Caio Apache VIP V 1726L BRT"
+    }
+  ];
+
+  const grupo = grupos.find(g =>
+    Number(numero) >= g.inicio &&
+    Number(numero) <= g.fim
+  );
+
+  if(!grupo){
+    modelo.innerHTML = "⚠️ Veículo não encontrado na base.";
+    return;
+  }
+
+  modelo.innerHTML =
+    "🚍 <b>Veículo:</b> " + numero +
+    "<br>📋 <b>Modelo:</b> " + grupo.nome;
+  }
   async function entrar(){
   
     const usuario = document.getElementById("usuario").value.trim();
@@ -437,7 +472,7 @@ async function abrirBaseMotoristas(){
 
     localStorage.setItem("usuarioUid", user.uid);
 const perfilRef = window.doc(window.db, "usuarios", user.uid);
-const perfilSnap = await getDoc(perfilRef);
+const perfilSnap = await window.getDoc(perfilRef);
 
 if(perfilSnap.exists()){
   const perfil = perfilSnap.data();
