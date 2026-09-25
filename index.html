@@ -209,7 +209,7 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
   };
 
   // Initialize Firebase
-  const app = initializeApp(firebaseCon
+    const app = initializeApp(firebaseConfig);
   window.auth = getAuth(app);
   window.db = getFirestore(app);
 window.signInWithEmailAndPassword = signInWithEmailAndPassword;
