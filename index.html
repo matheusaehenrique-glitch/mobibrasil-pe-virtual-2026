@@ -205,8 +205,8 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
     storageBucket: "mobibrasil-pe-virtual.firebasestorage.app",
     messagingSenderId: "20078213852",
     appId: "1:20078213852:web:a99ecdab91221a7cfa1219"
-
-  // Initialize Firebase
+  };
+   // Initialize Firebase
     const app = initializeApp(firebaseConfig);
   window.auth = getAuth(app);
   window.db = getFirestore(app);
@@ -214,7 +214,7 @@ window.serverTimestamp = serverTimestamp;
 window.doc = doc;
 window.setDoc = setDoc;
 window.signInWithEmailAndPassword = function(auth, email, senha) {
-  return signInWithEmailAndPassword(window.auth, email, password);
+  return signInWithEmailAndPassword(window.auth, email, senha);
 };
     </script>
 <script> function abrirOperacao(){
@@ -323,7 +323,7 @@ async function buscarVeiculo(numero){
     const user = resultado.user;
 
     localStorage.setItem("usuarioUid", user.uid);
-const perfilRef = doc(window.db, "usuarios", user.uid);
+const perfilRef = window.doc(window.db, "usuarios", user.uid);
 const perfilSnap = await getDoc(perfilRef);
 
 if(perfilSnap.exists()){
