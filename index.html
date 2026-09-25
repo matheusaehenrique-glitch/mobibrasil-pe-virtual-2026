@@ -66,7 +66,7 @@ button{width:100%;padding:13px;margin-top:8px;border:0;border-radius:10px;backgr
 <h3>🚌 Operação Regular</h3>
 <div class="tags">
 <span class="tag">⇆ Linha 1913</span>
-<span class="tag">▣ Veículo 1.816</span>
+<span class="tag" onclick="buscarVeiculo('2402')">▣ Veículo 2.402</span>
 </div>
 <div class="route">TI PE-15 / TI Joana Bezerra</div>
 <button id="btnEscala" type="button" style="display:none;" onclick="event.stopPropagation(); alterarEscala()">
@@ -267,7 +267,39 @@ if(novaEscala && novaEscala.trim() !== ""){
     }
 }
   }
-async function entrar(){
+async function buscarVeiculo(numero){
+  const veiculo = numero.toString().replace(/\./g, "").trim();
+
+  const grupos = [
+    {
+      inicio: 2301,
+      fim: 2331,
+      nome: "Mercedes-Benz O500R"
+    },
+    {
+      inicio: 2400,
+      fim: 2499,
+      nome: "Caio Apache VIP V 1726L BRT"
+    }
+  ];
+
+  const grupo = grupos.find(g =>
+    Number(veiculo) >= g.inicio &&
+    Number(veiculo) <= g.fim
+  );
+
+  if(!grupo){
+    alert("⚠️ Veículo não encontrado na base.");
+    return;
+  }
+
+  alert(
+    "🚍 VEÍCULO " + veiculo + "\n\n" +
+    "Modelo: " + grupo.nome + "\n" +
+    "Faixa: " + grupo.inicio + " - " + grupo.fim
+  );
+}
+  async function entrar(){
   
     const usuario = document.getElementById("usuario").value.trim();
   const senha = document.getElementById("senha").value;
