@@ -286,22 +286,10 @@ async function abrirBaseMotoristas(){
   lista.innerHTML = "<p>Carregando motoristas...</p>";
 
   try {
-    alert("🔎 Tentando carregar motoristas...");
-    const consulta = await Promise.race([
-  window.getDocs(
-    window.collection(window.db, "motoristas")
-  ),
-  new Promise((_, rejeitar) =>
-    setTimeout(() => rejeitar(new Error("Tempo esgotado ao acessar o Firestore.")), 8000)
-  )
-]);
-
-    lista.innerHTML = "";
-
-    if(consulta.empty){
-      lista.innerHTML = "<p>Nenhum motorista cadastrado.</p>";
-      return;
-    }
+    
+  const consulta = await window.getDocs(
+  window.collection(window.db, "motoristas")
+);
 
     consulta.forEach((docMotorista) => {
       const motorista = docMotorista.data();
