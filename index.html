@@ -532,7 +532,23 @@ if(escalaAnteriorSnap.exists()){
       alteradoEm: window.serverTimestamp()
     }
   );
-
+await window.setDoc(
+  window.doc(
+    window.db,
+    "historicoEscalas",
+    motoristaId + "_" + Date.now()
+  ),
+  {
+    motoristaId: motoristaId,
+    nome: motorista.nome || "Sem nome",
+    matricula: motoristaId,
+    veiculoAnterior: veiculoAnterior,
+    veiculoNovo: veiculo,
+    linhaAnterior: linhaAnterior,
+    linhaNova: linha,
+    alteradoEm: window.serverTimestamp()
+  }
+);
   alert(
     "✅ ESCALA SALVA COM SUCESSO!\n\n" +
     "Motorista: " + (motorista.nome || "Sem nome") + "\n" +
