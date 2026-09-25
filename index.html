@@ -311,7 +311,7 @@ async function abrirBaseMotoristas(){
         " • 🕐 " + (motorista.horario || "Sem horário") + "</p>";
 
       card.onclick = function(){
-  alert("CLIQUE NO MOTORISTA FUNCIONOU!");
+  abrirMotorista(docMotorista.id, motorista);
 };
       lista.appendChild(card);
     });
