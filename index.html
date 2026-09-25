@@ -348,9 +348,23 @@ lista.innerHTML = "";
     "Faixa: " + grupo.inicio + " - " + grupo.fim
   );
 }
-  function abrirMotorista(id, motorista){
+  async function abrirMotorista(id, motorista){
     window.motoristaSelecionadoId = id;
 window.motoristaSelecionado = motorista;
+    const escalaRef = window.doc(
+  window.db,
+  "escalasMotoristas",
+  id
+);
+
+const escalaSnap = await window.getDoc(escalaRef);
+
+if(escalaSnap.exists()){
+  motorista = {
+    ...motorista,
+    ...escalaSnap.data()
+  };
+}
   const lista = document.getElementById("motoristasLista");
 
   lista.innerHTML = `
