@@ -420,40 +420,106 @@ card.dataset.motoristaId = docMotorista.id;
   }
   async function mudarCargoMotorista(motoristaId){
 
-  const novoCargo = prompt(
-    "🔄 MUDAR DE CARGO\n\n" +
-    "Digite uma opção:\n\n" +
-    "1 - Motorista\n" +
-    "2 - Administrador"
-  );
+  const escolha = document.createElement("div");
 
-  if(novoCargo === "1"){
-    
-    await window.setDoc(
-      window.doc(window.db, "usuarios", motoristaId),
-      {
-        role: "motorista"
-      },
-      { merge: true }
+  escolha.style.position = "fixed";
+  escolha.style.left = "50%";
+  escolha.style.top = "50%";
+  escolha.style.transform = "translate(-50%, -50%)";
+  escolha.style.background = "#0e202d";
+  escolha.style.padding = "20px";
+  escolha.style.borderRadius = "18px";
+  escolha.style.border = "1px solid #294656";
+  escolha.style.zIndex = "10000";
+  escolha.style.width = "90%";
+  escolha.style.maxWidth = "350px";
+  escolha.style.boxShadow = "0 10px 40px #0008";
+
+  escolha.innerHTML = `
+    <h3 style="margin-top:0;text-align:center;">
+      🔄 Mudar de cargo
+    </h3>
+
+    <p style="text-align:center;">
+      Selecione o novo cargo:
+    </p>
+
+    <button id="btnAdmin"
+      style="background:#28a745;">
+      👑 Administrador
+    </button>
+
+    <button id="btnMotorista"
+      style="background:#168ee8;">
+      🚌 Motorista
+    </button>
+
+    <button id="btnCancelar"
+      style="background:#18303d;">
+      Cancelar
+    </button>
+  `;
+
+  document.body.appendChild(escolha);
+
+  document.getElementById("btnAdmin").onclick = function(){
+
+    const confirmar = confirm(
+      "👑 Mudar cargo para ADMINISTRADOR?\n\n" +
+      "Clique em OK para confirmar ou Cancelar para voltar."
     );
 
-    alert("✅ Cargo alterado para MOTORISTA.");
-    
-  } else if(novoCargo === "2"){
-    
-    await window.setDoc(
-      window.doc(window.db, "usuarios", motoristaId),
-      {
-        role: "admin"
-      },
-      { merge: true }
+    if(!confirmar) return;
+
+    alterarCargo("admin");
+  };
+
+  document.getElementById("btnMotorista").onclick = function(){
+
+    const confirmar = confirm(
+      "🚌 Mudar cargo para MOTORISTA?\n\n" +
+      "Clique em OK para confirmar ou Cancelar para voltar."
     );
 
-    alert("✅ Cargo alterado para ADMINISTRADOR.");
-    
-  } else if(novoCargo !== null){
-    
-    alert("⚠️ Opção inválida.");
+    if(!confirmar) return;
+
+    alterarCargo("motorista");
+  };
+
+  document.getElementById("btnCancelar").onclick = function(){
+    escolha.remove();
+  };
+
+  async function alterarCargo(novoCargo){
+
+    try {
+
+      await window.setDoc(
+        window.doc(window.db, "usuarios", motoristaId),
+        {
+          role: novoCargo
+        },
+        { merge: true }
+      );
+
+      escolha.remove();
+
+      alert(
+        "✅ Cargo alterado com sucesso!\n\n" +
+        "Novo cargo: " +
+        (novoCargo === "admin" ? "Administrador" : "Motorista")
+      );
+
+    } catch(erro){
+
+      console.error(erro);
+
+      alert(
+        "❌ Não foi possível alterar o cargo.\n\n" +
+        erro.message
+      );
+
+    }
   }
   }
   async function excluirMotorista(motoristaId){
