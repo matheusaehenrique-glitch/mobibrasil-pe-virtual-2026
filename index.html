@@ -1069,9 +1069,9 @@ window.abrirHistoricoViagens = abrirHistoricoViagens;
   menu.style.boxShadow = "0 5px 20px rgba(0,0,0,.4)";
 
   menu.innerHTML =
-    "<button onclick='abrirHistoricoViagens
-    "<button onclick='mudarCargoMotorista(\"" + motoristaId + "\")'>🔄 Mudar de cargo</button>" +
-    "<button onclick='excluirMotorista(\"" + motoristaId + "\")'>🗑️ Excluir</button>";
+  "<button onclick='abrirHistoricoViagens(\"" + motoristaId + "\")'>📊 Histórico de viagens</button>" +
+"<button onclick='mudarCargoMotorista(\"" + motoristaId + "\")'>🔄 Mudar de cargo</button>" +
+"<button onclick='excluirMotorista(\"" + motoristaId + "\")'>🗑️ Excluir</button>";
 
   document.body.appendChild(menu);
 
