@@ -711,7 +711,7 @@ card.dataset.motoristaId = docMotorista.id;
 "</div>" +
 "<p>🪪 Matrícula: " + (motorista.matricula || docMotorista.id) + "</p>" +
 "<p>🟢 Status: " + (motorista.status || "Sem status") + "</p>" +
-"<p>📊 Viagens na semana: " + (motorista.viagensSemana || 0) + "</p>" +
+"📊 Viagens no mês: " + (motorista.viagensMes || 0) +
 "<button type='button' onclick='registrarViagem(\"" + docMotorista.id + "\");event.stopPropagation();'>" +
 "➕ Registrar viagem" +
 "</button>";
