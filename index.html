@@ -733,6 +733,94 @@ card.dataset.motoristaId = docMotorista.id;
 
   try {
 
+    const motoristaRef = window.doc(
+      window.db,
+      "motoristas",
+      motoristaId
+    );
+
+    const motoristaSnap = await window.getDoc(motoristaRef);
+
+    if(!motoristaSnap.exists()){
+      alert("❌ Motorista não encontrado.");
+      return;
+    }
+
+    const motorista = motoristaSnap.data();
+
+    const agora = new Date();
+
+    const ano = agora.getFullYear();
+    const mes = String(agora.getMonth() + 1).padStart(2, "0");
+
+    const mesAtual = ano + "-" + mes;
+
+    const mesAnterior = motorista.mesViagens || mesAtual;
+    const viagensAtuais = motorista.viagensMes || 0;
+
+    // Se começou um novo mês
+    if(mesAnterior !== mesAtual){
+
+      // Guarda o mês anterior no histórico
+      await window.setDoc(
+        window.doc(
+          window.db,
+          "historicoViagens",
+          motoristaId + "_" + mesAnterior
+        ),
+        {
+          motoristaId: motoristaId,
+          nome: motorista.nome || "Sem nome",
+          matricula: motorista.matricula || motoristaId,
+          mes: mesAnterior,
+          totalViagens: viagensAtuais,
+          encerradoEm: window.serverTimestamp()
+        },
+        { merge: true }
+      );
+
+      // Começa o novo mês com 0 viagens
+      await window.setDoc(
+        motoristaRef,
+        {
+          viagensMes: 0,
+          mesViagens: mesAtual
+        },
+        { merge: true }
+      );
+
+    } else {
+
+      // Soma uma viagem no mês atual
+      await window.setDoc(
+        motoristaRef,
+        {
+          viagensMes: window.increment(1),
+          mesViagens: mesAtual
+        },
+        { merge: true }
+      );
+
+    }
+
+    alert("✅ Viagem registrada com sucesso!");
+
+    abrirBaseMotoristas();
+
+  } catch(erro) {
+
+    console.error(erro);
+
+    alert(
+      "❌ Não foi possível registrar a viagem.\n\n" +
+      erro.message
+    );
+
+  }
+  }
+
+  try {
+
     await window.setDoc(
       window.doc(window.db, "motoristas", motoristaId),
       {
