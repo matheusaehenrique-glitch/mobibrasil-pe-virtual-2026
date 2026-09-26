@@ -782,15 +782,15 @@ card.dataset.motoristaId = docMotorista.id;
         { merge: true }
       );
 
-      // Começa o novo mês com 0 viagens
-      await window.setDoc(
-        motoristaRef,
-        {
-          viagensMes: 0,
-          mesViagens: mesAtual
-        },
-        { merge: true }
-      );
+      // Começa o novo mês com a primeira viagem registrada
+await window.setDoc(
+    motoristaRef,
+    {
+        viagensMes: 1,
+        mesViagens: mesAtual
+    },
+    { merge: true }
+);
 
     } else {
 
