@@ -875,10 +875,186 @@ async function excluirViagem(motoristaId){
 }
 
 window.excluirViagem = excluirViagem;
-  
 
-    
-  
+
+async function abrirHistoricoViagens(motoristaId){
+
+  try {
+
+    const motoristaRef = window.doc(
+      window.db,
+      "motoristas",
+      motoristaId
+    );
+
+    const motoristaSnap = await window.getDoc(motoristaRef);
+
+    if(!motoristaSnap.exists()){
+      alert("❌ Motorista não encontrado.");
+      return;
+    }
+
+    const motorista = motoristaSnap.data();
+
+    const historicoSnap = await window.getDocs(
+      window.collection(window.db, "historicoViagens")
+    );
+
+    let historicos = [];
+
+    historicoSnap.forEach(docHistorico => {
+
+      const dados = docHistorico.data();
+
+      if(dados.motoristaId === motoristaId){
+        historicos.push(dados);
+      }
+
+    });
+
+    historicos.sort((a,b) => {
+      return String(b.mes || "").localeCompare(String(a.mes || ""));
+    });
+
+    let html = `
+      <div id="modalHistoricoViagens"
+        style="
+          position:fixed;
+          inset:0;
+          background:#000b;
+          z-index:10000;
+          display:flex;
+          align-items:center;
+          justify-content:center;
+          padding:20px;
+        ">
+
+        <div style="
+          width:100%;
+          max-width:430px;
+          max-height:85vh;
+          overflow:auto;
+          background:#0c1d2a;
+          border:1px solid #294656;
+          border-radius:20px;
+          padding:20px;
+        ">
+
+          <h2>📊 Histórico de viagens</h2>
+
+          <p>
+            👤 ${motorista.nome || "Sem nome"}<br>
+            🪪 Matrícula: ${motorista.matricula || motoristaId}
+          </p>
+
+          <div style="
+            background:#123c4d;
+            padding:14px;
+            border-radius:12px;
+            margin-bottom:12px;
+          ">
+            <b>📅 Mês atual</b>
+            <div style="font-size:28px;font-weight:bold;">
+              ${motorista.viagensMes || 0}
+            </div>
+            <small>viagens registradas</small>
+          </div>
+    `;
+
+    if(historicos.length === 0){
+
+      html += `
+        <div style="
+          padding:15px;
+          background:#102536;
+          border-radius:12px;
+        ">
+          📭 Nenhum mês anterior no histórico.
+        </div>
+      `;
+
+    } else {
+
+      html += `<h3>Meses anteriores</h3>`;
+
+      historicos.forEach(item => {
+
+        let mesFormatado = item.mes || "Mês não informado";
+
+        const partes = String(item.mes || "").split("-");
+
+        if(partes.length === 2){
+
+          const data = new Date(
+            Number(partes[0]),
+            Number(partes[1]) - 1,
+            1
+          );
+
+          mesFormatado = data.toLocaleDateString(
+            "pt-BR",
+            {
+              month:"long",
+              year:"numeric"
+            }
+          );
+
+          mesFormatado =
+            mesFormatado.charAt(0).toUpperCase() +
+            mesFormatado.slice(1);
+        }
+
+        html += `
+          <div style="
+            background:#102536;
+            border:1px solid #234050;
+            padding:14px;
+            border-radius:12px;
+            margin-bottom:8px;
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+          ">
+            <b>📅 ${mesFormatado}</b>
+
+            <strong style="font-size:22px;">
+              ${item.totalViagens || 0}
+            </strong>
+          </div>
+        `;
+      });
+    }
+
+    html += `
+          <button
+            type="button"
+            onclick="document.getElementById('modalHistoricoViagens').remove()"
+            style="margin-top:12px;"
+          >
+            Fechar
+          </button>
+
+        </div>
+      </div>
+    `;
+
+    document.body.insertAdjacentHTML("beforeend", html);
+
+  } catch(erro) {
+
+    console.error(erro);
+
+    alert(
+      "❌ Não foi possível carregar o histórico.\n\n" +
+      erro.message
+    );
+
+  }
+}
+
+window.abrirHistoricoViagens = abrirHistoricoViagens;
+
+
   function abrirMenuMotorista(botao){
   const motoristaId = botao.closest(".card").dataset.motoristaId;
 
