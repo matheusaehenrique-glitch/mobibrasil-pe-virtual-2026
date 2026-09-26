@@ -714,6 +714,9 @@ card.dataset.motoristaId = docMotorista.id;
 "📊 Viagens no mês: " + (motorista.viagensMes || 0) +
 "<button type='button' onclick='registrarViagem(\"" + docMotorista.id + "\");event.stopPropagation();'>" +
 "➕ Registrar viagem" +
+"</button>" +
+"<button type='button' onclick='excluirViagem(\"" + docMotorista.id + "\");event.stopPropagation();'>" +
+"➖ Excluir viagem" +
 "</button>";
     card.onclick = function(event){
   if(event.target.closest("button")) return;
