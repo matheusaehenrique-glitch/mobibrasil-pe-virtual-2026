@@ -819,31 +819,10 @@ card.dataset.motoristaId = docMotorista.id;
   }
   }
 
-  try {
+  
 
-    await window.setDoc(
-      window.doc(window.db, "motoristas", motoristaId),
-      {
-        viagensSemana: window.increment(1)
-      },
-      { merge: true }
-    );
-
-    alert("✅ Viagem registrada com sucesso!");
-
-    abrirBaseMotoristas();
-
-  } catch(erro) {
-
-    console.error(erro);
-
-    alert(
-      "❌ Não foi possível registrar a viagem.\n\n" +
-      erro.message
-    );
-
-  }
-  }
+    
+  
   function abrirMenuMotorista(botao){
   const motoristaId = botao.closest(".card").dataset.motoristaId;
 
