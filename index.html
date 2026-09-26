@@ -818,7 +818,60 @@ card.dataset.motoristaId = docMotorista.id;
 
   }
   }
+async function excluirViagem(motoristaId){
 
+  if(!confirm("Deseja excluir 1 viagem deste motorista?")){
+    return;
+  }
+
+  try {
+
+    const motoristaRef = window.doc(
+      window.db,
+      "motoristas",
+      motoristaId
+    );
+
+    const motoristaSnap = await window.getDoc(motoristaRef);
+
+    if(!motoristaSnap.exists()){
+      alert("❌ Motorista não encontrado.");
+      return;
+    }
+
+    const motorista = motoristaSnap.data();
+    const viagens = motorista.viagensMes || 0;
+
+    if(viagens <= 0){
+      alert("⚠️ Este motorista não possui viagens para excluir.");
+      return;
+    }
+
+    await window.setDoc(
+      motoristaRef,
+      {
+        viagensMes: window.increment(-1)
+      },
+      { merge: true }
+    );
+
+    alert("✅ 1 viagem foi excluída!");
+
+    abrirBaseMotoristas();
+
+  } catch(erro) {
+
+    console.error(erro);
+
+    alert(
+      "❌ Não foi possível excluir a viagem.\n\n" +
+      erro.message
+    );
+
+  }
+}
+
+window.excluirViagem = excluirViagem;
   
 
     
