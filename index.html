@@ -718,9 +718,6 @@ card.dataset.motoristaId = docMotorista.id;
 "<button type='button' onclick='excluirViagem(\"" + docMotorista.id + "\");event.stopPropagation();'>" +
 "➖ Excluir viagem" +
 "</button>" +
-"<button type='button' onclick='abrirHistoricoViagens(\"" + docMotorista.id + "\");event.stopPropagation();'>" +
-"📚 Histórico de viagens" +
-"</button>";
     card.onclick = function(event){
   if(event.target.closest("button")) return;
   abrirMotorista(docMotorista.id, motorista);
