@@ -883,7 +883,12 @@ window.excluirViagem = excluirViagem;
 async function abrirHistoricoViagens(motoristaId){
 
   try {
+if (!window.auth.currentUser) {
+  alert("🔒 Usuário não está autenticado no Firebase.");
+  return;
+}
 
+console.log("Usuário autenticado:", window.auth.currentUser.email);
     const motoristaRef = window.doc(
       window.db,
       "motoristas",
